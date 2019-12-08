@@ -30,7 +30,7 @@ export const WelcomePageContent = props => {
         </WelcomeLogo>
         <WelcomeProfile data-testid="welcome-profile">
           <h3>
-            {t('welcome.welcome')}, <WelcomeName>{name}</WelcomeName>
+            Bem vindo, <WelcomeName>{name}</WelcomeName>
           </h3>
           <ImageWrapper>
             <Uploader
