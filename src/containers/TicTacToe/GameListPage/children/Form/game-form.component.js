@@ -572,43 +572,6 @@ const GameForm = ({ webId, sendNotification, opponent, setOpponent }: Props) => 
           </div>)
       })}
 
-      <h1>{t('game.title')}</h1>
-      <hr />
-      <form>
-        <span>{t('game.createGamePrompt')}</span>
-        <div className="input-wrap">
-          <label htmlFor="documentUriInput">
-            {t('game.idLabel')}
-            <input
-              id="documentUriInput"
-              type="text"
-              value={documentUri}
-              onChange={e => setDocumentUri(e.target.value)}
-              data-testid="uri-input"
-            />
-          </label>
-        </div>
-        <div className="input-wrap">
-          <label htmlFor="opponentWebId">
-            {t('game.opponentWebIDLabel')}
-            <input
-              id="opponentWebId"
-              type="text"
-              value={opponent}
-              onChange={e => setOpponent(e.target.value)}
-              data-testid="webId"
-            />
-          </label>
-        </div>
-        <BtnDiv>
-          <button type="submit" data-testid="form-submit">
-            {t('game.createGame')}
-          </button>
-          <button type="button" onClick={reset}>
-            {t('game.resetGameForm')}
-          </button>
-        </BtnDiv>
-      </form>
     </GameFormWrapper>
   );
 };
