@@ -45,11 +45,20 @@ export class WelcomeComponent extends Component<Props> {
      * will contain all of the data stored in the webID link, such as profile information. Then, we're grabbing the user.name property
      * from the returned user object.
      */
+    
     const user = data[webId];
+    
     const nameLd = await user.vcard_fn;
 
     const name = nameLd && nameLd.value.trim().length > 0 ? nameLd.value : webId.toString();
     const imageLd = await user.vcard_hasPhoto;
+
+    const doc = data['https://guttz.inrupt.net/materia1']
+    await doc.type.add('https://schema.org/Course')
+    await doc['https://schema.org/courseCode'].add("CS-001")
+    await doc['https://schema.org/description'].add("Computer Science 101")
+    
+    debugger
 
     let image;
     if (imageLd && imageLd.value) {
@@ -94,7 +103,9 @@ export class WelcomeComponent extends Component<Props> {
     const { name, image, isLoading } = this.state;
     const { webId } = this.props;
     return (
-      <WelcomePageContent {...{ name, image, isLoading, webId, updatePhoto: this.updatePhoto }} />
+      <div>
+        <WelcomePageContent {...{ name, image, isLoading, webId, updatePhoto: this.updatePhoto }} />
+      </div>
     );
   }
 }

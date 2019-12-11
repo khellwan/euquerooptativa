@@ -22,6 +22,7 @@ const GameItem = ({ game, webId, deleteGame }: Props) => {
   return (
     <Item className="card item__span-4-columns">
       <GameCard>
+      AAAAAAA
         <ProfileDisplayItem
           player={opponent && opponent.webId !== webId ? opponent : actor}
           status={status}
