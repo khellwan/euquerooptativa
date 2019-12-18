@@ -25,11 +25,8 @@ const GameListPage = ({ webId }) => {
   const init = async () => {
     try {
       const gameUrl = await storageHelper.getAppStorage(webId);
-      const gamePath = await ldflexHelper.createContainer(gameUrl);
-      if (gamePath) {
-        await createInbox(`${gamePath}inbox/`, gamePath);
-        setGamePath(gamePath);
-      }
+      // Create courses list if it doesn't exist
+      const gamePath = await ldflexHelper.createNonExistentDocument(`${gameUrl}courses.ttl`);
     } catch (e) {
       /**
        * Check if something fails when we try to create a inbox

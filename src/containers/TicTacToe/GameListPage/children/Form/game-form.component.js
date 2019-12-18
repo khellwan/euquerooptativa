@@ -14,6 +14,9 @@ import {
 import { GameFormWrapper, BtnDiv } from './game-form.styles';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
+import { useCourseList } from '@hooks/useCourseList';
+import { rdf, schema } from 'rdf-namespaces';
+
 type Props = {
   webId: String,
   sendNotification: () => void,
@@ -28,7 +31,6 @@ const GameForm = ({ webId, sendNotification, opponent, setOpponent }: Props) => 
 
   const reset = () => {
     setDocumentUri('');
-    setOpponent('');
   };
 
   /**
@@ -128,390 +130,397 @@ const GameForm = ({ webId, sendNotification, opponent, setOpponent }: Props) => 
     }
   };
 
+  const [courseListDocument, setCourseListDocument] = useCourseList(webId);
 
   const universityCourses = [
     {
     courseCode : "EL68F",
-    couseName : "Controle Supervisório",
+    courseName : "Controle Supervisório",
     },
     {
     courseCode : "",
-    couseName : "Controle Inteligente",
+    courseName : "Controle Inteligente",
     },
     {
     courseCode : "",
-    couseName : "Identificação de Sistemas",
+    courseName : "Identificação de Sistemas",
     },
     {
     courseCode : "EL6AC",
-    couseName : "Controle 3",
+    courseName : "Controle 3",
     },
     {
     courseCode : "",
-    couseName : "Controle 4",
+    courseName : "Controle 4",
     },
     {
     courseCode : "",
-    couseName : "Controle a Eventos Discretos",
+    courseName : "Controle a Eventos Discretos",
     },
     {
     courseCode : "CSV30",
-    couseName : "Processamento Digital de Imagens",
+    courseName : "Processamento Digital de Imagens",
     },
     {
     courseCode : "",
-    couseName : "Processamento Digital de Imagens 2",
+    courseName : "Processamento Digital de Imagens 2",
     },
     {
     courseCode : "",
-    couseName : "Introdução À Visão Computacional",
+    courseName : "Introdução À Visão Computacional",
     },
     {
     courseCode : "",
-    couseName : "Visão Computacional",
+    courseName : "Visão Computacional",
     },
     {
     courseCode : "CSV45",
-    couseName : "Reconhecimento de Padrões em Imagens",
+    courseName : "Reconhecimento de Padrões em Imagens",
     },
     {
     courseCode : "",
-    couseName : "Computação Gráfica",
+    courseName : "Computação Gráfica",
     },
     {
     courseCode : "",
-    couseName : "Tópicos Avançados em Processamento Gráfico",
+    courseName : "Tópicos Avançados em Processamento Gráfico",
     },
     {
     courseCode : "",
-    couseName : "Fundamentos de Processamento de Imagens Médicas",
+    courseName : "Fundamentos de Processamento de Imagens Médicas",
     },
     {
     courseCode : "",
-    couseName : "IA Distribuída",
+    courseName : "IA Distribuída",
     },
     {
     courseCode : "",
-    couseName : "Meta-heurísticas Inspiradas em Inteligência Coletiva",
+    courseName : "Meta-heurísticas Inspiradas em Inteligência Coletiva",
     },
     {
     courseCode : "",
-    couseName : "Sistemas Fuzzy",
+    courseName : "Sistemas Fuzzy",
     },
     {
     courseCode : "CSI41",
-    couseName : "Redes Neurais",
+    courseName : "Redes Neurais",
     },
     {
     courseCode : "",
-    couseName : "Computação Evolucionária",
+    courseName : "Computação Evolucionária",
     },
     {
     courseCode : "",
-    couseName : "Ontologias",
+    courseName : "Ontologias",
     },
     {
     courseCode : "",
-    couseName : "Sistemas Autônomos Inteligentes",
+    courseName : "Sistemas Autônomos Inteligentes",
     },
     {
     courseCode : "CSI53",
-    couseName : "Mineração de Dados",
+    courseName : "Mineração de Dados",
     },
     {
     courseCode : "",
-    couseName : "Algoritmos e Complexidade",
+    courseName : "Algoritmos e Complexidade",
     },
     {
     courseCode : "",
-    couseName : "Complexidade Computacional",
+    courseName : "Complexidade Computacional",
     },
     {
     courseCode : "",
-    couseName : "Introdução à Criptografia",
+    courseName : "Introdução à Criptografia",
     },
     {
     courseCode : "",
-    couseName : "Computação Quântica",
+    courseName : "Computação Quântica",
     },
     {
     courseCode : "CSA42",
-    couseName : "Teoria dos Grafos",
+    courseName : "Teoria dos Grafos",
     },
     {
     courseCode : "CSA45",
-    couseName : "Geometria Computacional",
+    courseName : "Geometria Computacional",
     },
     {
     courseCode : "",
-    couseName : "Projeto de Infra-Estrutura de Redes",
+    courseName : "Projeto de Infra-Estrutura de Redes",
     },
     {
     courseCode : "",
-    couseName : "Redes e Sistemas de Comunicação Móveis",
+    courseName : "Redes e Sistemas de Comunicação Móveis",
     },
     {
     courseCode : "CSR41",
-    couseName : "Oficina de Redes",
+    courseName : "Oficina de Redes",
     },
     {
     courseCode : "CSR42",
-    couseName : "Infraestrutura de LANs Hierárquicas",
+    courseName : "Infraestrutura de LANs Hierárquicas",
     },
     {
     courseCode : "CSR43",
-    couseName : "Infraestrutura de WANs",
+    courseName : "Infraestrutura de WANs",
     },
     {
     courseCode : "CSR44",
-    couseName : "Segurança de Redes e Sistemas",
+    courseName : "Segurança de Redes e Sistemas",
     },
     {
     courseCode : "",
-    couseName : "Redes sem Fio",
+    courseName : "Redes sem Fio",
     },
     {
     courseCode : "",
-    couseName : "Simul. e Análise de Desempenho de Redes de Computadores",
+    courseName : "Simul. e Análise de Desempenho de Redes de Computadores",
     },
     {
     courseCode : "EL6BF",
-    couseName : "Comunicações sem Fio",
+    courseName : "Comunicações sem Fio",
     },
     {
     courseCode : "CSE40",
-    couseName : "Engenharia de Software 2",
+    courseName : "Engenharia de Software 2",
     },
     {
     courseCode : "",
-    couseName : "Engenharia de Requisitos",
+    courseName : "Engenharia de Requisitos",
     },
     {
     courseCode : "",
-    couseName : "Metodologias Ágeis p/ o Desenvolvimento de SW",
+    courseName : "Metodologias Ágeis p/ o Desenvolvimento de SW",
     },
     {
     courseCode : "",
-    couseName : "Testes, Verificação e Validação de  Sistemas",
+    courseName : "Testes, Verificação e Validação de  Sistemas",
     },
     {
     courseCode : "",
-    couseName : "Sistemas Legados",
+    courseName : "Sistemas Legados",
     },
     {
     courseCode : "",
-    couseName : "Modelagem de Software",
+    courseName : "Modelagem de Software",
     },
     {
     courseCode : "",
-    couseName : "Gerenciamento de Projeto de Software",
+    courseName : "Gerenciamento de Projeto de Software",
     },
     {
     courseCode : "CSE47",
-    couseName : "Gerência de Projetos",
+    courseName : "Gerência de Projetos",
     },
     {
     courseCode : "",
-    couseName : "Qualidade de Software",
+    courseName : "Qualidade de Software",
     },
     {
     courseCode : "CSM30",
-    couseName : "Desenvolvimento Integrado de Sistemas",
+    courseName : "Desenvolvimento Integrado de Sistemas",
     },
     {
     courseCode : "MA70C",
-    couseName : "Cálculo Numérico",
+    courseName : "Cálculo Numérico",
     },
     {
     courseCode : "",
-    couseName : "Simulação de Eventos Discretos",
+    courseName : "Simulação de Eventos Discretos",
     },
     {
     courseCode : "EL6AA",
-    couseName : "Programação Matemática",
+    courseName : "Programação Matemática",
     },
     {
     courseCode : "",
-    couseName : "Simulação de Sistemas Biológicos e Sociais",
+    courseName : "Simulação de Sistemas Biológicos e Sociais",
     },
     {
     courseCode : "CSD45",
-    couseName : "Modelagem e Avaliação de Sistemas",
+    courseName : "Modelagem e Avaliação de Sistemas",
     },
     {
     courseCode : "",
-    couseName : "Introdução à Computação Científica",
+    courseName : "Introdução à Computação Científica",
     },
     {
     courseCode : "",
-    couseName : "Métodos Formais II",
+    courseName : "Métodos Formais II",
     },
     {
     courseCode : "",
-    couseName : "Tópicos Especiais em Telemática III-D",
+    courseName : "Tópicos Especiais em Telemática III-D",
     },
     {
     courseCode : "",
-    couseName : "Métodos Estocásticos",
+    courseName : "Métodos Estocásticos",
     },
     {
     courseCode : "FI70A",
-    couseName : "Mecânica Geral 1",
+    courseName : "Mecânica Geral 1",
     },
     {
     courseCode : "FI70B -",
-    couseName : "Mecânica Geral 2",
+    courseName : "Mecânica Geral 2",
     },
     {
     courseCode : "FI70D",
-    couseName : "Fenômenos de Transporte 1",
+    courseName : "Fenômenos de Transporte 1",
     },
     {
     courseCode : "",
-    couseName : "Ótica",
+    courseName : "Ótica",
     },
     {
     courseCode : "",
-    couseName : "Fotônica",
+    courseName : "Fotônica",
     },
     {
     courseCode : "",
-    couseName : "Bibliotecas Digitais",
+    courseName : "Bibliotecas Digitais",
     },
     {
     courseCode : "CSB41",
-    couseName : "Banco de Dados 2",
+    courseName : "Banco de Dados 2",
     },
     {
     courseCode : "CSB51",
-    couseName : "Recuperação Inteligente de Informações",
+    courseName : "Recuperação Inteligente de Informações",
     },
     {
     courseCode : "",
-    couseName : "Computação Baseada em Dados",
+    courseName : "Computação Baseada em Dados",
     },
     {
     courseCode : "",
-    couseName : "Banco de Dados",
+    courseName : "Banco de Dados",
     },
     {
     courseCode : "",
-    couseName : "Data Warehousing",
+    courseName : "Data Warehousing",
     },
     {
     courseCode : "CSH30",
-    couseName : "Introdução à Interação Humano-Computador",
+    courseName : "Introdução à Interação Humano-Computador",
     },
     {
     courseCode : "CSH42",
-    couseName : "Acessibilidade e Inclusão Digita",
+    courseName : "Acessibilidade e Inclusão Digita",
     },
     {
     courseCode : "",
-    couseName : "Avaliação em IHC",
+    courseName : "Avaliação em IHC",
     },
     {
     courseCode : "",
-    couseName : "Computação e Sociedade",
+    courseName : "Computação e Sociedade",
     },
     {
     courseCode : "",
-    couseName : "Trabalho Cooperativo Apoiado por Computador",
+    courseName : "Trabalho Cooperativo Apoiado por Computador",
     },
     {
     courseCode : "",
-    couseName : "Tópicos em Design de Interação",
+    courseName : "Tópicos em Design de Interação",
     },
     {
     courseCode : "",
-    couseName : "Fundamentos em Interação",
+    courseName : "Fundamentos em Interação",
     },
     {
     courseCode : "",
-    couseName : "Design de Interação",
+    courseName : "Design de Interação",
     },
     {
     courseCode : "",
-    couseName : "Engenharia Biomédica",
+    courseName : "Engenharia Biomédica",
     },
     {
     courseCode : "EL6DA",
-    couseName : "BioEngenharia",
+    courseName : "BioEngenharia",
     },
     {
     courseCode : "",
-    couseName : "Engenharia Médica",
+    courseName : "Engenharia Médica",
     },
     {
     courseCode : "EL6DC",
-    couseName : "Engenharia Clínica",
+    courseName : "Engenharia Clínica",
     },
     {
     courseCode : "",
-    couseName : "Instrumentação e Transdução Biomédica 1",
+    courseName : "Instrumentação e Transdução Biomédica 1",
     },
     {
     courseCode : "",
-    couseName : "Instrumentação e Transdução Biomédica 2",
+    courseName : "Instrumentação e Transdução Biomédica 2",
     },
     {
     courseCode : "",
-    couseName : "Lógica Programável e VHDL",
+    courseName : "Lógica Programável e VHDL",
     },
     {
     courseCode : "",
-    couseName : "Introdução à MicroEletronica",
+    courseName : "Introdução à MicroEletronica",
     },
     {
     courseCode : "",
-    couseName : "Laboratório de Processamento Digital de Sinais ",
+    courseName : "Laboratório de Processamento Digital de Sinais ",
     },
     {
     courseCode : "",
-    couseName : "Arquiteturas Avançadas de Computadores (UFPR)",
+    courseName : "Arquiteturas Avançadas de Computadores (UFPR)",
     },
     {
     courseCode : "",
-    couseName : "Arquitetura de Computadores Paralelos (UFPR)",
+    courseName : "Arquitetura de Computadores Paralelos (UFPR)",
     },
     {
     courseCode : "",
-    couseName : "Robótica Móvel",
+    courseName : "Robótica Móvel",
     },
     {
     courseCode : "",
-    couseName : "Engenharia de Sistemas aplicada a Sistemas Ciberfísicos",
+    courseName : "Engenharia de Sistemas aplicada a Sistemas Ciberfísicos",
     },
     {
     courseCode : "",
-    couseName : "Sistemas de Tempo Real",
+    courseName : "Sistemas de Tempo Real",
     },
     {
     courseCode : "",
-    couseName : "Tópicos Avançados em Sistemas Embarcados",
+    courseName : "Tópicos Avançados em Sistemas Embarcados",
     },
     {
     courseCode : "",
-    couseName : "HTML/CSS",
+    courseName : "HTML/CSS",
     },
     {
     courseCode : "CSM41",
-    couseName : "Desenvolvimento de Aplicações Web",
+    courseName : "Desenvolvimento de Aplicações Web",
     },
     {
     courseCode : "",
-    couseName : "Infraestrutura para Tecnologia de Informação",
+    courseName : "Infraestrutura para Tecnologia de Informação",
     },
     {
     courseCode : "CSM43",
-    couseName : "Programação para Dispositivos Móveis e Sem Fio",
+    courseName : "Programação para Dispositivos Móveis e Sem Fio",
     },
     {
     courseCode : "DI84D",
-    couseName : "Web Design"
+    courseName : "Web Design"
     }
     ]
-  /**
+  
+  const getSelectedCourseIndexes = () => {
+    return [];
+  }
+
+  const [courseIndexes, setCourseIndexes] = useState(getSelectedCourseIndexes());
+    /**
    * Creates a new game based on an opponent's webId and a game document url with an acl file
    * @param {Event} e Submit event
    */
@@ -549,29 +558,61 @@ const GameForm = ({ webId, sendNotification, opponent, setOpponent }: Props) => 
     }
   };
 
-  return (
-    <GameFormWrapper onSubmit={onSubmit} data-testid="game-form">
-      
+  const saveCourses = async () => {
+    // Remove all the courses and save the ones currently selected
+    const courseList = courseListDocument.getSubjectsOfType(schema.Course);
+    for (let course of courseList) {
+      courseListDocument.removeSubject(course.asRef());
+    }
+    
+    const newCourseList = [];
+    courseIndexes.forEach((index) => {
+      // Create each subject and fill in it's data
+      const newCourse = courseListDocument.addSubject();
+      newCourse.addRef(rdf.type, schema.Course);
+      newCourse.addLiteral(schema.courseCode, universityCourses[index].courseCode);
+      newCourse.addLiteral(schema.description, universityCourses[index].courseName);
+      newCourseList.push(newCourse);
+    })
+    const newDocument = await courseListDocument.save(courseList.concat(newCourseList));
+    setCourseListDocument(newDocument);
+  }
 
+  const handleCheckboxChange = async index => {
+    const currentIndex = courseIndexes.indexOf(index);
+    const newIndexes = [...courseIndexes];
+
+    if (currentIndex === -1) {
+      newIndexes.push(index);
+    } else {
+      newIndexes.splice(currentIndex, 1);
+    }
+    console.log(newIndexes);
+    setCourseIndexes(newIndexes);
+  }
+
+  return (
+    <GameFormWrapper data-testid="game-form">
       <h1>Lista Disciplinas Optativas</h1>
       <hr />
       <span>Selecione as disciplinas que você tem interesse</span>
       <br></br>
       <br></br>
+      <button onClick={saveCourses}><span>Salvar disciplinas</span></button>
       {universityCourses.map((course, index) => {
         return(
           <div>
             {index+1 + ". "}
             <Checkbox
               value="checkedE"
+              onClick={() => handleCheckboxChange(index)}
               inputProps={{
                 'aria-label': 'disabled checked checkbox',
               }}
             />
-            {course.courseCode ? course.courseCode : 'CSX00'} - <strong>{course.couseName}</strong>
+            {course.courseCode ? course.courseCode : 'CSX00'} - <strong>{course.courseName}</strong>
           </div>)
       })}
-
     </GameFormWrapper>
   );
 };
