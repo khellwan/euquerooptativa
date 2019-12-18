@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { namedNode } from '@rdfjs/data-model';
@@ -12,9 +12,9 @@ import {
   notification as helperNotification
 } from '@utils';
 import { GameFormWrapper, BtnDiv } from './game-form.styles';
-import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useCourseList } from '@hooks/useCourseList';
+import { useCourseIndexes } from '@hooks/useCourseIndexes';
 import { rdf, schema } from 'rdf-namespaces';
 
 type Props = {
@@ -515,11 +515,24 @@ const GameForm = ({ webId, sendNotification, opponent, setOpponent }: Props) => 
     }
     ]
   
-  const getSelectedCourseIndexes = () => {
-    return [];
-  }
+  const [courseIndexes, setCourseIndexes] = useCourseIndexes(webId, universityCourses);
 
-  const [courseIndexes, setCourseIndexes] = useState(getSelectedCourseIndexes());
+  // useEffect(() => {
+  //   if (courseListDocument == null) return;
+  //   const courseList = courseListDocument.getSubjectsOfType(schema.Course);
+  //   const newCourseIndexes = [];
+
+  //   // For each course the user has interest, look through the university courses to check the checkbox
+  //   // Matching the names because some courses have no code
+  //   courseList.forEach((userCourse) => {
+  //     universityCourses.map((uniCourse, index) => {
+  //       if (uniCourse.courseName == userCourse.getString(schema.description))
+  //         newCourseIndexes.push(index);
+  //     });
+  //   })
+  //   setCourseIndexes(newCourseIndexes);
+  // },[courseListDocument])
+
     /**
    * Creates a new game based on an opponent's webId and a game document url with an acl file
    * @param {Event} e Submit event
@@ -605,6 +618,7 @@ const GameForm = ({ webId, sendNotification, opponent, setOpponent }: Props) => 
             {index+1 + ". "}
             <Checkbox
               value="checkedE"
+              checked={courseIndexes.indexOf(index) !== -1}
               onClick={() => handleCheckboxChange(index)}
               inputProps={{
                 'aria-label': 'disabled checked checkbox',

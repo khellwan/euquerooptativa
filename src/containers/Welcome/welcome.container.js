@@ -53,12 +53,10 @@ export class WelcomeComponent extends Component<Props> {
     const name = nameLd && nameLd.value.trim().length > 0 ? nameLd.value : webId.toString();
     const imageLd = await user.vcard_hasPhoto;
 
-    const doc = data['https://guttz.inrupt.net/materia1']
-    await doc.type.add('https://schema.org/Course')
-    await doc['https://schema.org/courseCode'].add("CS-001")
-    await doc['https://schema.org/description'].add("Computer Science 101")
-    
-    debugger
+    // const doc = data['https://guttz.inrupt.net/materia1']
+    // await doc.type.add('https://schema.org/Course')
+    // await doc['https://schema.org/courseCode'].add("CS-001")
+    // await doc['https://schema.org/description'].add("Computer Science 101")
 
     let image;
     if (imageLd && imageLd.value) {
